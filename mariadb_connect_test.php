@@ -1,24 +1,23 @@
 <?php
 
-//db  연결
+//PDO db 연결 파일
 include('DbConnection/dbcon.php');
 
-//test_table db가져옴
-$query="select*from test_table";
-
-//쿼리 날림
-$send=mysqli_query($db,$query);
-
-//쿼리 결과 array로
-$row=mysqli_fetch_array($send);
-
-//가장  첫번째 값
-$result=$row[0];
-
-echo '결과 가지고 옴->'.$result;
+$name="shawn";
+$select_data_stmt = $pdo->prepare('SELECT * FROM test_table WHERE name= :name');
+$select_data_stmt->bindValue(':name',$name,PDO::PARAM_STR);
+$select_data_stmt->execute();
+$result = $select_data_stmt->fetch(PDO::FETCH_ASSOC);
+   
+print_r($result);
 
 
-mysqli_close($db);
+// while (($result = $select_data_stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+    
+//     echo 'db에서 가지고 온 값 ->  '.$result['name'].'</br>';
+// }
+
+
 
 ?>
 
