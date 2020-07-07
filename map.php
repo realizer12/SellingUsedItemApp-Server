@@ -19,58 +19,19 @@ $sended_phone_number=$_POST['phone_number'];
 //휴대폰 인증 하는 이유  0=회원가입, 1=아이디 찾기, 2= 비밀 번호 찾기
 $map_reason=$_POST['map_reason'];
 
-//현재 시간  넣어줌 -위  default timezone-서울
-$present_time = date('Y-m-d H:i:s');
-
-
-$select_past_auth_info=$pdo->prepare('SELECT map_key_generate_date FROM member_auth_phone_num WHERE map_phone_number=:phone_num ORDER BY map_id DESC');
-    
-$select_past_auth_info->bindValue(':phone_num','01073807810');    
-
-
-try{
-
-    //쿼리  실행
-    $select_past_auth_info->execute();
-
-    if($select_past_auth_info){
-         
-       $result=$select_past_auth_info->fetch();
-       
-       $right_past_time= $result['map_key_generate_date'];
-
-
-       $now=new DateTime($present_time);
-       $before=new DateTime($right_past_time);
-
-       $diff=$now->getTimestamp() - $before->getTimestamp();
-
-    }
-
-}catch(PDOException $e){
-
-    echo "$e";
-}
-
-
-    
 
 //prepare 문을 사용해서 member_auth_phone_num 테이블 insert 쿼리 준비
 $insert_phone_auth_data_stmt=$pdo->prepare(
     'INSERT INTO member_auth_phone_num 
-     (map_phone_number,map_key,map_key_generate_date,map_reason) 
-     values(:phone_num,:map_key,:map_key_generate_date,:map_reason)');
+     (map_phone_number,map_key,map_reason) 
+     values(:phone_num,:map_key,:map_reason)');
 
 //5자리 랜덤 key 생성
 $map_key_number = sprintf('%05d',rand(00000,99999));
 
 $insert_phone_auth_data_stmt->bindValue(':phone_num',$sended_phone_number);//폰번호 바인딩
 $insert_phone_auth_data_stmt->bindValue(':map_key',$map_key_number);//인증 키 바인딩
-$insert_phone_auth_data_stmt->bindValue(':map_key_generate_date',$present_time);//인증 신청 시간 바인딩
 $insert_phone_auth_data_stmt->bindValue(':map_reason',$map_reason);//인증 출처 바인딩
-
-
-
 
 try{
 
