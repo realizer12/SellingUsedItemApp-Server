@@ -41,7 +41,7 @@ try{
     //insert 성공시 앱으로 성공메세지 1 보냄
     if($insert_phone_auth_data_stmt){
        
-        include('sms_auth/sendsms.php');
+        //include('sms_auth/sendsms.php');//청기와랩 api sms  보내는 파일
         echo "1";
 
     }
