@@ -11,7 +11,7 @@ $request_login_email=$_POST['login_email'];
 //member_info 테이블에서 client에서 받아온  이메일  COUNT 조회
 $query="SELECT COUNT(*) FROM member_info WHERE email=:login_email";
 
-//중복체크하기 위한 select 쿼리문
+//중복체크하기 위한 select 쿼리문 prepare
 $select_login_email_check_stmt=$pdo->prepare($query);
 
 //해당 중복 체크 할  이메일 데이터 바인딩
