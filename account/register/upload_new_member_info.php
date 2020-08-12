@@ -18,8 +18,8 @@ $member_nickname=$new_member_info->nick_name;
 //패스워드 sort값이랑 hash값 같이  있는 jSONobject
 $password_json=$new_member_info->password;
 
-//sort 값
-$sort_value=$password_json->sort_value;
+//salt 값
+$salt_value=$password_json->salt_value;
 
 //비밀번호 256 hash 값
 $sha_value=$password_json->sha_value;
@@ -27,12 +27,12 @@ $sha_value=$password_json->sha_value;
 //핸드폰 번호
 $phone_num=$new_member_info->phone_num;
 
+//sns 로그인  
 
 
 //가입하려는 멤버 정보를  서버에 업로드 하는 쿼리문
-$query='INSERT INTO member_info (email,password,phone_num,nickname,sort_value)
-VALUES(:email,:password,:phone_num,:nickname,:sort_value)';
-
+$query='INSERT INTO member_info (email,password,phone_num,nickname,salt_value)
+VALUES(:email,:password,:phone_num,:nickname,:salt_value)';
 
 
 //새 멤버 등록  쿼리문 날림
@@ -50,19 +50,19 @@ $insert_new_member_stmt->bindValue('phone_num',$phone_num);
 //멤버 닉네임 데이터 바인딩 
 $insert_new_member_stmt->bindValue('nickname',$member_nickname);
 
-//sort값  데이터 바인딩
-$insert_new_member_stmt->bindValue('sort_value',$sort_value);
+//salt값  데이터 바인딩
+$insert_new_member_stmt->bindValue('salt_value',$salt_value);
 
 
 try{
 
   $insert_new_member_stmt->execute();
 
-   if($insert_new_member_stmt){
+   if($insert_new_member_stmt){//서버에 회원가입 성공
 
       echo "1";
 
-   }else{
+   }else{//회원가입 실패
 
       echo "2";
 
@@ -74,8 +74,6 @@ try{
     echo "$e";
 
 }
-
-
 
 
 ?>

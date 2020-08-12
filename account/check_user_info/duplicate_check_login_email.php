@@ -1,7 +1,6 @@
 <?php
 //로그인 이메일  중복 체크 해주는 서버 코드
 
-
 //PDO db 연결 파일
 include('DbConnection/dbcon.php');
 
