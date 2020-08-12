@@ -4,7 +4,7 @@
 
 
 //PDO db 연결 파일
-include('DbConnection/dbcon.php');
+include('../../DbConnection/dbcon.php');
 
 //새로운  멤버  정보  json -decode 시킴
 $new_member_info=json_decode($_POST['new_ember_info']);

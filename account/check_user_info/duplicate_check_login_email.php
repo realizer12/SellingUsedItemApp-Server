@@ -2,7 +2,7 @@
 //로그인 이메일  중복 체크 해주는 서버 코드
 
 //PDO db 연결 파일
-include('DbConnection/dbcon.php');
+include('../../DbConnection/dbcon.php');
 
 //요청된 로그인 이메일 
 $request_login_email=$_POST['login_email'];

@@ -3,7 +3,7 @@
 
 
 //PDO db 연결 파일
-include('DbConnection/dbcon.php');
+include('../../DbConnection/dbcon.php');
 
 //요청된  닉네임 
 $request_nickname=$_GET['nickname'];

@@ -6,7 +6,7 @@
 
 
 //PDO db 연결 파일
-include('DbConnection/dbcon.php');
+include('../../DbConnection/dbcon.php');
 
 //아래  sms 인증 시간이  다르게 나와서
 //한국(서울) 시간을 default timezone으로 설정
@@ -64,7 +64,7 @@ if($check_phone_number_used){
         //insert 성공시 앱으로 성공메세지 1 보냄
         if($insert_phone_auth_data_stmt){
        
-            include('sms_auth/sendsms.php');//청기와랩 api sms  보내는 파일
+            include('../../sms_auth/sendsms.php');//청기와랩 api sms  보내는 파일
             echo "1";//중복값 없어서  sms 인증코드 보냄
 
         }

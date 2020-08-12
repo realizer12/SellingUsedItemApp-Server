@@ -5,7 +5,7 @@
 //인증키가 맞으면 1을  틀리면 0 의 콜백 값을 보내준다
 
 //PDO db 연결 파일
-include('DbConnection/dbcon.php');
+include('../../DbConnection/dbcon.php');
 
 //아래  sms 인증 시간이  다르게 나와서
 //한국(서울) 시간을 default timezone으로 설정
