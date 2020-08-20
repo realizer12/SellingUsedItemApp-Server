@@ -60,23 +60,23 @@ try{
           
 
 
-           //받은  client의 uuid와 uid를  합친 문자열을 
-           //hash 256 암호화를 적용하여  hash 값을 만들어낸다 
-           $hash_256=hash("sha256",$uuid.$row['uid']);
+            //받은  client의 uuid와 uid를  합친 문자열을 
+            //hash 256 암호화를 적용하여  hash 값을 만들어낸다 
+            $hash_256=hash("sha256",$uuid.$row['uid']);
 
-           //위에서 만든  해쉬값 대문자 형태로 바꿔줌
-           $hashed_result=strtoupper($hash_256);
+            //위에서 만든  해쉬값 대문자 형태로 바꿔줌
+            $hashed_result=strtoupper($hash_256);
 
 
-           //auth_token 이랑 uid 쿼리에 binding 
-           $stmt_update_auth_token->bindValue('hashed_token',$hashed_result);
-           $stmt_update_auth_token->bindValue('uid',$row['uid']);
+            //auth_token 이랑 uid 쿼리에 binding 
+            $stmt_update_auth_token->bindValue('hashed_token',$hashed_result);
+            $stmt_update_auth_token->bindValue('uid',$row['uid']);
 
-           $stmt_update_auth_token->execute();
+            $stmt_update_auth_token->execute();
 
 
            //update 성공
-           if($stmt_update_auth_token){
+        if($stmt_update_auth_token){
 
             //여기서  uid랑  client에서 받은  uuid를  가지고 auth_token만들고 
             //db저장 하고  uid만  넘겨주기 ㄱㄱ
@@ -84,15 +84,13 @@ try{
             $callback_data['uid']=$row['uid'];
  
 
-           }else{//업데이트 실패
+        }else{//업데이트 실패
 
 
             $callback_data['response']=-1;
             $callback_data['uid']=null;
 
-           }
-
-
+        }
                      
         }else{//가입한 유저는 맞지만, 가입 경로가 달라서  로그인 또는 회원가입 불가 
            
