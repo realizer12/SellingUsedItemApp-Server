@@ -32,6 +32,7 @@ $stmt->bindValue('uid',$user_uid);
 $stmt->bindValue('auth_token',$hashed_result);
 
 
+
 try{
 
    //위 prepare한 statment 실행 
@@ -46,16 +47,17 @@ try{
         //개수가 1개 일때 -> 성공 
         if($result==1){
   
-            echo "success";
+            
+            echo json_encode(array('response'=>true,'status'=>null));
   
         }else{
   
-            echo "fail";
+            echo json_encode(array('response'=>false,'status'=>2));
         }
   
     }else{//쿼리 실패시
   
-        echo "fail";
+        echo json_encode(array('response'=>false,'status'=>3));
   
     }
 
