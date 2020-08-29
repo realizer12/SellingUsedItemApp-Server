@@ -11,7 +11,7 @@ include('../../DbConnection/dbcon.php');
 //유저가 보낸 이메일
 $user_email=$_POST['user_email'];
 
-//유저의 패스워드 
+//유저의 패스워드   
 $user_password=$_POST['user_password'];
 
 //유저 식별을 위한 파이어베이스 uuid
@@ -49,6 +49,7 @@ try{
     //조회한 row
     $selected_row=$email_select_stmt->fetch();
 
+    $callback_data=array();
 
     //해당 조회한  이메일로 값이 있을 경우
     if($selected_row != null){
