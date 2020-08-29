@@ -37,6 +37,10 @@ $select_map_table->bindValue(':reason',$map_reason); //인증 이유 바인딩
 $update_auth_check_status=$pdo->prepare('UPDATE member_auth_phone_num SET map_status=1 WHERE map_id=:map_id');
 
 
+//해당 번호로 가입된  이메일 가져오기 위한 쿼리
+$select_email_with_phonnumber=$pdo->prepare('SELECT email FROM member_info WHERE phone_num=:phone_number LIMIT 1');
+$select_email_with_phonnumber->bindValue(':phone_number',$sended_phone_number);
+
 try{
 
     //위  조회문 쿼리  실행
@@ -62,7 +66,30 @@ try{
 
               if($update_auth_check_status){
 
-               echo "1";//모든 절차 다  성공시
+
+               if($map_reason==1){//회원가입의 경우는 이메일을 같인 retun 시켜줘야되서 빼줌
+
+                  //이메일 조회 쿼리 실행
+                  $select_email_with_phonnumber->execute();
+                 
+                  if($select_email_with_phonnumber){//이메일 조회 성공
+
+                     $row_for_email=$select_email_with_phonnumber->fetch();
+                     echo json_encode(array('return_email'=>$row_for_email['email'],'return_status'=> 1)); 
+
+                  }else{//이메일 조회 실패
+
+                     echo "7";
+                  }
+                  
+                
+               
+               }else{
+
+                  echo "1";//회원가입이랑 비밀번호 찾기 때  인증코드 확인 성공
+               }
+
+            
 
               }else{
                  
