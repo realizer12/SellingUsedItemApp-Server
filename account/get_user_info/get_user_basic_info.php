@@ -16,6 +16,7 @@ $user_uid = $_POST['uid'];
 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
 //유저의 정보를 가지고 오기위한 쿼리문 여러개 날림
+//프로필 이미지 , 닉네임 넣기
 $query = 'SELECT nickname FROM member_info WHERE uid= :user_uid; 
 SELECT img_url FROM profile_img WHERE uid = :user_uid;
 SELECT coin FROM user_coin WHERE uid = :user_uid;';
@@ -50,9 +51,9 @@ try{
 
   }else{
 
-    $callback_array['nickname']=null;
-    $callback_array['img_url']=null;
-    $callback_array['coin']=null;
+    $callback_array['nickname']=-1;
+    $callback_array['img_url']=-l;
+    $callback_array['coin']=-l;
   }
 
    
